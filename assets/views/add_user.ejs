@@ -1,0 +1,139 @@
+<%- include('include/_header') %>
+    <!-- /include header -->
+ <style>
+  .close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+ </style>
+  <head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  </head>
+    <!-- Main Site -->
+    <main id="site-main">
+      <div class="container">
+          <div class="box-nav d-flex justify-between">
+              <div class="filter">
+                  <a href="/"><i class="fas fa-angle-double-left"></i> All Users</a>
+              </div>
+              <div class="filter">
+                <a href="add-column"><i class="fas fa-angle-double-left"></i> Add Column</a>
+            </div>
+          </div>
+            <div class="form-title text-center">
+                <h2 class="text-dark">New Row</h2>
+                <span class="text-light">Use the below form to create a new account</span>
+            </div>
+
+            <!-- add user form -->
+            <% for(var i=0;i< cdata.length ; i++ ) {%>
+                <% if(cdata[i].DATA_TYPE == 'varchar'){%>
+                <div class="ui form">
+                    <div class="field">
+                      <label><%= cdata[i].COLUMN_NAME %></label>
+                      <input type="text">
+                    </div>
+                </div>
+                  <% } %>
+                  <% if(cdata[i].DATA_TYPE == 'datetime'){%>
+                    <label><%= cdata[i].COLUMN_NAME %></label>
+                    <div class="ui form">
+                      <div class="field">
+                      <input type="datetime-local" id="birthdaytime" name="birthdaytime">
+                    </div>
+                    </div>
+                  <% } %>
+                  <% if(cdata[i].DATA_TYPE == 'date'){%>
+                   <label><%= cdata[i].COLUMN_NAME %></label>
+                   <div class="ui form">
+                     <div class="field">
+                     <input type="date" id="birthdaytime" name="birthdaytime">
+                   </div>
+                   </div>
+                  <% } %>
+                  <% if(cdata[i].DATA_TYPE == 'int'){%>
+                    <div class="ui form">
+                      <div class="field">
+                        <label><%= cdata[i].COLUMN_NAME %></label>
+                        <input type="number">
+                      </div>
+                  </div>
+                   <% } %>
+                  <% if(cdata[i].DATA_TYPE == 'text'){%>
+                    <div class="ui form">
+                      <div class="field">
+                        <label><%= cdata[i].COLUMN_NAME %></label>
+                        <input type="text">
+                      </div>
+                  </div>
+                  <% } %>
+                  <% if(cdata[i].DATA_TYPE == 'time'){%>
+                    <div class="ui form">
+                      <div class="field">
+                        <label><%= cdata[i].COLUMN_NAME %></label>
+                        <input type="time">
+                      </div>
+                  </div>
+                    <% } %>
+                 <% } %>
+                 <% for(var i=0;i< drpd.data.drpd.length ; i++ ) {%>
+                  <div class="ui form">
+                    <div class="field">
+                      <label><%= drpd.data.drpd[i].drpname %></label>
+                      <select>
+                          <% drpd.data.drpd[i].drpvalue.split(",").forEach(element => { %>
+                            <option value="volvo"><%= element %></option>
+                        <% }); %>
+                      </select>
+                    </div>
+                </div>                 
+                  <% } %>
+        </div>
+    </main>
+
+    <!-- /Main Site -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+<!--  -->
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+    <!-- Date Picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://unpkg.com/js-datepicker"></script>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>   
+
+    </body>
+    </html>

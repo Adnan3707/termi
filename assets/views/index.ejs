@@ -1,0 +1,696 @@
+<!--include header-->
+<%- include('include/_header') %>
+    <!--include header-->
+<style>
+     #col1 {margin: auto; width: 1007px; height: 123px; background: url(../images/logo.png) no-repeat 20px; background-color: #37352b; border: 1px solid #862209; margin-right: 12px !important; }
+</style>
+    <!-- Main Site -->
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex justify-between">
+                <a href="/add-user" class="border-shadow">
+                    <span class="text-gradient">New User <i class=" fas fa-user"></i></span>
+                </a>
+                <div class="filter">
+                    <a id="col1" href="/add-column"><i class=" right fas fa-angle-double-right"></i> Add Column</a>
+                </div>
+            </div>
+
+            <!-- form handling -->
+            <form action="/" method="POST" id="index">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <!-- <tr>
+                        <button>
+                            <tr class="edit"><input id="edit" type="button" value="EDIT"></tr>
+                        </button>
+                    </tr>
+                    <tr>
+                            <button > <tr><input class="fa fa-save" id="save" type="submit" value="SAVE"></tr>
+                            </button>
+                        </tr> 
+                        <tr>
+                            <button>
+                        <tr class="delete"><input id="delete" type="button" value="DELETE"></tr>
+                        </button>
+                        </tr> -->
+                        <!-- <tr class="slider">
+                            <div class="price-input">
+                                <div class="field">
+                                    <span>Min</span>
+                                    <input type="number" class="input-min" value="2500">
+                                </div>
+                                <div class="separator">-</div>
+                                <div class="field">
+                                    <span>Max</span>
+                                    <input type="number" class="input-max" value="7500">
+                                </div>
+                            </div>
+                            <div class="slider">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="range-input">
+                                <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+                                <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                            </div>
+                            </div>
+                        </tr> -->
+                        <!-- <tr>
+                            <tr><input id="text" type="text"  onkeyup="search()" placeholder="Search by Name"></tr>
+                        </tr> -->
+                    </thead>
+                </table>
+            <div  >
+                <input type="text" class="js-range-slider" name="my_range" value="" width="500px" />
+            </div>
+                 Search By Sales Person :-
+                 <select id="NameByCount" multiple="multiple"  >
+                        <option>Recurring Name</option>
+                    </select>
+                <input type="button" id="ResetFilter" value="Reset All Filters"> 
+                    <div id="myGrid" class="ag-theme-alpine" style="height: 500px"></div>
+            </form>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="../js/aggrid.js"
+        <script src="../js/index.js"></script>
+        <!-- JavaScript -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cartodb-libs.global.ssl.fastly.net/carto.js/v4.0.0-beta.25/carto.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.js"></script>
+        <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+        <!-- <script type="module" src="../../node_modules/ag-grid-enterprise/dist/ag-grid-enterprise.min.js" ></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- JS & CSS library of MultiSelect plugin -->
+    <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+        <!--Plugin CSS file with desired skin-->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
+        <!--Plugin JavaScript file-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    </main>
+    <!-- /Main Site -->
+    <script type="text/javascript">
+    var actioncelldata = []
+        $(function () {
+                $(".js-range-slider").ionRangeSlider({
+                     type: "double",
+                    min: 0,
+                    max: 4000,
+                    from: 400,
+                    to: 600,
+                    drag_interval: false,
+                    min_interval: null,
+                    max_interval: null,
+                onFinish: function (data) {
+                    var rnage = { value1: data.from, value2: data.to };
+                      var request = {
+                        url: `http://localhost:3000/api/users/search/id`,
+                        method: "GET",
+                        data: rnage,
+                    };
+                    $.ajax(request).done(function (response) {
+                        gridOptions.api.setRowData(response.data);
+                    })
+                    }
+            });
+            });
+
+//    setTimeout(()=>{
+//                 $("#NameByCount")
+//                 .multiselect({
+//                     onChange: function (option, checked) {
+//                         // Get selected options.
+//                         var selectedOptions = $('#NameByCount option:selected')
+//                 }
+//             });
+//             },1500)
+        // alertify.alert('Ready!');
+        let rowData = [];
+            let inputRow = {};
+             var columnDefs = []
+        function applyTrans(){
+            gridApi.applyTransaction({ add: [{}] })
+        }
+                // Fetch Column data from server
+           fetch("http://localhost:3000/api/users/clmn")
+                        .then(response => response.json())
+                        .then(data => {
+                            // console.log(data.data)
+                            // var opt = data.data.slice(1).map((data) => data.COLUMN_NAME ==='Status'? ( {field : data.COLUMN_NAME , editable: true , cellRenderer: actionCellRenderer ,valueGetter: abValueGetter})  :
+                            //     ({field : data.COLUMN_NAME , editable: true })) 
+                            var opt = data.data.slice(1).map((data) => ({field : data.COLUMN_NAME , editable: true }))
+                            // console.log(opt)
+                            opt.unshift({ field: "id" , filter: 'agNumberColumnFilter' ,checkboxSelection:true}) ;
+                            opt.push({field : 'DATE',editable: false,cellRenderer: CustomDateComponent ,filter: 'agDateColumnFilter',    // add extra parameters for the date filter
+    filterParams: {
+        // provide comparator function
+        comparator: function(filterLocalDateAtMidnight, cellValue) {
+            var dateAsString = cellValue;
+
+            if (dateAsString == null) {
+                return 0;
+            }
+
+            // In the example application, dates are stored as dd/mm/yyyy
+            // We create a Date object for comparison against the filter date
+            var dateParts = dateAsString.split('/');
+            var day = Number(dateParts[2]);
+            var month = Number(dateParts[1]) - 1;
+            var year = Number(dateParts[0]);
+            var cellDate = new Date(year, month, day);
+
+            // Now that both parameters are Date objects, we can compare
+            if (cellDate < filterLocalDateAtMidnight) {
+                return -1;
+            } else if (cellDate > filterLocalDateAtMidnight) {
+                return 1;
+            }
+            return 0;
+        }
+    }})
+                            opt.push({field : 'Action' , editable: true , cellRenderer: actionCellRenderer ,
+                             // valueGetter: abValueGetter
+                        })
+                            // opt.unshift( {field: "Actions", width: 90, cellRenderer: actionCellRenderer, suppressSorting: true ,editable: true ,valueGetter: abValueGetter })
+                            columnDefs.push(opt)
+                          gridOptions.api.setColumnDefs(opt);
+                        });
+//    console.log(columnDefs)
+        // // Function to demonstrate calling grid's API
+        function deselect() {
+            gridOptions.api.deselectAll()
+        }
+
+        // Grid Options are properties passed to the grid
+        const gridOptions = {
+
+            pinnedTopRowData: [inputRow],
+            // each entry here represents one column
+            // columnDefs: colDef[0],
+            // default col def properties get applied to all columns
+            defaultColDef: { sortable: true, filter: true,
+                 valueFormatter: (params) =>
+                    isEmptyPinnedCell(params)
+                        ? createPinnedCellPlaceholder(params)
+                        : undefined, 
+                    // Delete Row
+                 suppressKeyboardEvent: params => {
+                    if (!params.editing) {
+                        let isBackspaceKey = params.event.keyCode === 8;
+                        let isDeleteKey = params.event.keyCode === 46;
+
+                        // Delete selected rows with back space
+
+                        if (isBackspaceKey) {
+                            swal({
+                                title: "Are you sure?",
+                                text: "Once deleted, you will not be able to recover this imaginary file!",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then((willDelete) => {
+                                if (willDelete) {
+                                    {
+                                        // arrdel.forEach((ele) => {
+                                        //     let request = {
+                                        //         url: `http://localhost:3000/api/users/${ele}`,
+                                        //         method: "DELETE",
+                                        //     };
+                                        //     $.ajax(request).done(function (response) { });
+                                        // });
+                                    }
+                                    swal("Rows has been deleted!", {
+                                        icon: "success",
+                                    }).then(function () {
+                                    });
+                                } else {
+                                    swal("Everything is safe!");
+                                    location.reload();
+                                }
+                            });
+                            const selectedRows = params.api.getSelectedRows();
+                            params.api.applyTransaction({ remove: selectedRows });
+                            return true;
+                        }
+
+                        // delete range selected cell values
+
+                        if (isDeleteKey) {
+                            // for each of our range selection
+                            params.api.getCellRanges().forEach(range => {
+                                let colIds = range.columns.map(col => col.colId);
+
+                                let startRowIndex = Math.min(
+                                    range.startRow.rowIndex,
+                                    range.endRow.rowIndex
+                                );
+                                let endRowIndex = Math.max(
+                                    range.startRow.rowIndex,
+                                    range.endRow.rowIndex
+                                );
+
+                                clearCells(startRowIndex, endRowIndex, colIds, params.api);
+                            });
+                        }
+
+                        return false;
+                    }
+                },
+                    },
+            pagination: true,
+            // enableRangeSelection: true,
+            editType: 'fullRow',
+            rowSelection: 'multiple', // allow rows to be selected
+            animateRows: true, // have rows animate to new positions when sorted
+            onCellValueChanged: onCellValueChanged,
+
+            // cellEditorSelector: cellEditorSelector
+            // example event handler
+            // onCellClicked: params => {
+            //     console.log('cell was clicked', params.data)
+            // }
+              getRowStyle: ({ node }) =>
+                node.rowPinned ? { fontWeight: 'bold', fontStyle: 'italic' } : 0,
+
+            onCellEditingStopped: (params) => {
+                console.log('Cell Editing Stoped')
+       if (isPinnedRowDataCompleted(params)) {
+           let currentRowData = [];
+           gridOptions.api.forEachNode(({ data }) => currentRowData.push(data));
+           let newRowData = [...currentRowData, inputRow];
+           gridOptions.api.setRowData(newRowData)
+           // console.log(newRowData)
+           inputRow = {};
+           gridOptions.api.setPinnedTopRowData([inputRow]);
+           var notification = alertify.notify('sample', 'Added User Successfully', 5, function () { console.log('dismissed'); });
+           var request = {
+                url: `http://localhost:3000/api/users`,
+                method: "POST",
+                data: event.data,
+            };
+
+            $.ajax(request).done(function (response) {
+                // alert("Data Updated Successfully!");
+            });
+            // var notification = alertify.notify('sample', 'success', 5, function () {
+            //     console.log('Updated'); })
+            alertify.success('Updated Data Successfully')
+        }
+            },
+        };
+
+        function isPinnedRowDataCompleted(params) {
+             console.log(params)
+              if (!params.rowPinned === 'top') return;
+            let columnFields = columnDefs[0].map((columnDef) => columnDef.field).slice(1)
+            console.log(columnFields)
+            for (let field of columnFields) {
+                console.log(inputRow[field])
+                if (inputRow[field] == null) {
+                    return false;
+                }
+            }
+            return true;
+            }
+        class actionCellRenderer {    
+            // gets called once before the renderer is used
+            init(params) {
+                // create the cell
+                                this.actionsButton = document.createElement('select');
+                                this.actionsButton.id = `sle`
+                                params.data.Status == 'Active' ? this.actionsButton.innerHTML = `
+                                    <option value="Active" selected>Active</option>
+                                    <option value="Inactive">Inactive</option> `: 
+                                    this.actionsButton.innerHTML =`
+                                    <option value="Inactive" selected>Inactive</option>
+                                    <option value="Active">Active</option>
+                                    `
+
+                this.actionsButton.onchange = function(){
+                    console.log(this.value); //returns the selected value
+                    // alert(this.innerHTML); //returns the entire select with all the options
+                    // console.log(this.selected); //this is what I want, but doesn't work, of course
+                    let data = getSelectedRowData()
+                var actionData =  data.map(obj => {
+                        return {
+                            ...obj,Action: this.value
+                        }
+                    })
+                    console.log(actionData)
+                    actioncelldata.push(actionData)
+                };
+
+                //    // add event listener to button
+                //    this.eButton.addEventListener('click', this.eventListener);
+                //    this.conceptName.addEventListener('click', this.eventListener);
+                // this.conceptName.onclick=()=>this.eventListener
+            }
+
+            getGui() {
+                return this.actionsButton
+            }
+
+            // gets called whenever the cell refreshes
+            refresh(params) {
+                //    // set value into cell again
+                //    this.cellValue = this.getValueToDisplay(params);
+                //    this.eValue.innerHTML = this.cellValue;
+
+                // return true to tell the grid we refreshed successfully
+                return true;
+            }
+
+            // gets called when the cell is removed from the grid
+            destroy() {
+                // do cleanup, remove event listener from button
+                //    $(this.actionsButton).remove();
+                //    if (this.actionsButton) {
+                //        // check that the button element exists as destroy() can be called before getGui()
+                //        this.eButton.removeEventListener('click', this.eventListener);
+                //    }
+            }
+
+            getValueToDisplay(params) {
+                return params.valueFormatted ? params.valueFormatted : params.value;
+            }
+}
+console.log('Action data Outside Class',actioncelldata)
+
+         class CustomDateComponent {
+            //   init(params) {
+            //             const template = `
+            //                 <input type="text" data-input style="width: 100%;" />
+            //                 <a class="input-button" title="clear" data-clear>
+            //                     <i class="fa fa-times"></i>
+            //                 </a>`;
+
+            //             this.params = params;
+                    
+            //             this.eGui = document.createElement('div');
+            //             this.eGui.setAttribute('role', 'presentation');
+            //             this.eGui.classList.add('ag-input-wrapper');
+            //             this.eGui.classList.add('custom-date-filter');
+            //             this.eGui.innerHTML = template;
+                    
+            //             this.eInput = this.eGui.querySelector('input');
+                    
+            //             this.picker = flatpickr(this.eGui, {
+            //                 confirmIcon: "<i class='fa fa-check'></i>", // your icon's html, if you wish to override
+            //                 confirmText: "OK ",
+            //                 showAlways: true,
+            //                 "enableTime": true,
+            //                 onChange: this.onDateChanged.bind(this),
+            //                 dateFormat: 'd/m/Y',
+            //                 wrap: true
+            //             });
+            //             this.picker.calendarContainer.classList.add('ag-custom-component-popup');
+                    
+            //             this.date = null;
+            //         }
+
+                    getGui() {
+                        return this.eGui;
+                    }
+
+                    onDateChanged(selectedDates) {
+                        console.log(this.params)
+                        console.log(selectedDates)
+                        this.date = selectedDates[0] || null;
+                        this.params.onDateChanged();
+                    }
+
+                    getDate() {
+                        return this.date;
+                    }
+
+                    setDate(date) {
+                        console.log(date)
+                        this.picker.setDate(date);
+                        this.date = date;
+                    }
+
+                    setInputPlaceholder(placeholder) {
+                        this.eInput.setAttribute('placeholder', placeholder);
+                    }
+              }
+     
+         CustomDateComponent.prototype.init = function (params) {
+        let custom_date_component = this;
+        var template =
+            "<input type='text' data-input />" +
+            "<a class='input-button' title='clear' data-clear>" +
+            "<i class='fa fa-times'></i>" +
+            "</a>";
+
+        this.params = params;
+
+        this.eGui = document.createElement('div');
+
+        var eGui = this.eGui;
+
+        eGui.setAttribute('role', 'presentation');
+        eGui.classList.add('ag-input-wrapper');
+        eGui.classList.add('custom-date-filter');
+        eGui.innerHTML = template;
+
+        this.eInput = eGui.querySelector('input');
+
+        this.picker = flatpickr(this.eGui, {
+            confirmIcon: "<i class='fa fa-check'></i>", // your icon's html, if you wish to override
+                confirmText: "OK ",
+                showAlways: true,
+                 enableTime: true,
+            onChange: function (dateobj, datestr) {
+                console.log(custom_date_component)
+                let d = dateobj[0]
+                // .subStr(dateobj[0].indexOf('1'))
+                // console.log(typeof d)
+                console.log(params.data)
+                console.log(dateobj)
+                console.log(datestr)
+                actioncelldata.push(datestr)
+                //  custrom_date_component.date = dateobj[0]
+                let data = getSelectedRowData()
+                console.log(data)
+            },
+            // onChange: this.onDateChanged.bind(this),
+                dateFormat: "Y-m-d H:i",
+            // dateFormat: 'd/m/Y',
+            wrap: true
+        });
+    }
+
+        // function abValueGetter(params) {
+        // console.log(params)
+        //    return params.data.Date
+        //     }
+
+        function isEmptyPinnedCell({ node, value }) {
+                return (
+                    (node.rowPinned === 'top' && value == null) ||
+                    (node.rowPinned === 'top' && value === '')
+                );
+            }
+
+        function createPinnedCellPlaceholder({ colDef }) {
+                    return colDef.field[0].toUpperCase() + colDef.field.slice(1) + '...';
+                }
+
+
+        
+        // function cellEditorSelector(params) {
+        //     if (params.data.Gender === 'Male') {
+        //             console.log("clicked")
+        //             return {
+        //                 component: 'agRichSelectCellEditor',
+        //                 params: {
+        //                     values: ['Male', 'Female'],
+        //                 },
+        //                 popup: true,
+        //             };
+        //         }
+
+        //         return undefined;
+        //     }
+        function onCellValueChanged(event) {
+            // console.log(event.data)
+            // console.log(getSelectedRowData()) 
+            console.log(event.data.id)
+            if(event.data.id){
+                console.log(' On cell value condition false')
+            }
+            if(event.data.id){
+          var request = {
+                url: `http://localhost:3000/api/users/${event.data.id}`,
+                method: "PUT",
+                data: event.data,
+            };
+
+            $.ajax(request).done(function (response) {
+                // alert("Data Updated Successfully!");
+            });
+            // var notification = alertify.notify('sample', 'success', 5, function () {
+            //     console.log('Updated'); })
+            alertify.success('Updated Data Successfully')
+                // alertify.confirm('Confirm Message', function () { alertify.success('Ok') }, function () { alertify.error('Cancel') });
+            //               swal({
+            //     title: "Good job!",
+            //     text: "Data Updated",
+            //     icon: "success",
+            //     button: true,
+            //     function(isConfirm) {
+            //         debugger;
+            //         setTimeout(function () {
+            //             if (isConfirm) {
+            //                 swal("yes, do it!");
+            //             } else {
+            //                 swal("cannel!");
+            //             }
+            //         }, 400);
+            //     }
+            // }).then(function () {
+            //     // location.reload();
+            // });
+            // } 
+            } else {
+            console.log(event)
+        //   var request = {
+        //         url: `http://localhost:3000/api/users`,
+        //         method: "POST",
+        //         data: event.data,
+        //     };
+
+        //     $.ajax(request).done(function (response) {
+        //         // alert("Data Updated Successfully!");
+        //     });
+        //     // var notification = alertify.notify('sample', 'success', 5, function () {
+        //     //     console.log('Updated'); })
+        //     alertify.success('Updated Data Successfully')
+         }
+        }
+        function clearCells(start, end, columns, gridApi) {
+                let itemsToUpdate = [];
+
+                for (let i = start; i <= end; i++) {
+                    let data = gridApi.rowModel.rowsToDisplay[i].data;
+                    columns.forEach(column => {
+                        data[column] = "";
+                    });
+                    itemsToUpdate.push(data);
+                }
+
+                gridApi.applyTransaction({ update: itemsToUpdate });
+            }
+        function getSelectedRowData() {
+            let selectedData = gridOptions.api.getSelectedRows();
+            // console.log(selectedData)
+            // alert(`Selected Data:\n${JSON.stringify(selectedData)}`);
+            return selectedData;
+            }
+        
+            // get div to host the grid
+    const updateNameRowData = (name) => {
+        // var name = this.value;
+        // console.log(name)
+        fetch(`http://localhost:3000/api/users/name?Name=${name}`)
+            .then((response) => response.json())
+            .then((data) => {
+                // console.log(data.rows)
+                // load fetched data into grid
+                gridOptions.api.setRowData(data.rows);
+            });
+        // gridOptions.api.setRowData(newRowData);
+    };
+
+
+        const eGridDiv = document.getElementById("myGrid");
+        // new grid instance, passing in the hosting DIV and Grid Options
+        new agGrid.Grid(eGridDiv, gridOptions);
+
+        // Fetch data from server
+        fetch("http://localhost:3000/api/users")
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                // load fetched data into grid
+                gridOptions.api.setRowData(data.rows);
+            });
+
+            // User Dropdown
+         var select = document.getElementById("NameByCount");
+            let dropdown = [];
+            const dropreq = {
+            url: `http://localhost:3000/api/users/samename`,
+            method: "GET",
+            };
+            // console.log(dropreq)
+            $.ajax(dropreq).done(function (response) {
+            console.log(response.data)
+            dropdown.push(response.data);
+            for (var i = 0; i < response.data.length; i++) {
+                var opt = response.data[i].Name;
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                select.appendChild(el);
+            }
+            $("#NameByCount")
+                .multiselect({
+                    onChange: function (option, checked) {
+                        // Get selected options.
+                        var selectedOptions = $('#NameByCount option:selected')
+                }
+            })
+            })
+            // console.log(select)
+
+    $('#ResetFilter').on('click',function(){
+        gridOptions.api.setFilterModel(null);
+    // $('#NameByCount').val('Recurring Name').prop('selected', true)
+    })
+   window.addEventListener("load", function () {
+        // console.log('helloo')
+   $("#NameByCount").on("change", function () {
+        console.log($("#NameByCount").val())
+        if (!this.value.includes("Recurring")) {
+            // alert(this.value);
+            console.log(this.value)
+           updateNameRowData(this.value)
+            }else {
+                        fetch("http://localhost:3000/api/users")
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data)
+                    // load fetched data into grid
+                    gridOptions.api.setRowData(data.rows);
+                });
+            }
+    })
+
+});
+
+   </script>
+    
+   </body>
+
+    </html>

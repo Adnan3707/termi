@@ -1,0 +1,110 @@
+                                <!-- <td>
+                                    <input type="checkbox" id="enabled<%= i %>" name="enabled[<%= i %>]" <%=announcement.enabled ? "checked" : null %> >
+                                </td> -->
+
+                                  <select name="cars" id="cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+
+
+                                  <select name="Gender" id="gender">
+                                <option value="Male"><%= users[i].Gender %></option>
+                                <option value="Female">Female</option>
+                                </select>
+                                                                <td><%= users[i].Gender %></td>
+                                            
+                                            <td id="<%= users[i].Status %>"><%= users[i].Status %></td>
+
+                                                                            <td id="<%= users[i].Email %>"><%= users[i].Email %></td>
+
+                                                                            ----------------
+                        <tr>
+                            <button class="Button">
+                                <input id="cancelButton" style="" onclick="cancelButton_Click" type="button"
+                                    value="Delete">
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="Button">
+                                <input id="cancelButton" style="" onclick="cancelButton_Click" type="button"
+                                    value="Update">
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="Button">
+                                <input id="cancelButton" style="" onclick="cancelButton_Click" type="button"
+                                    value="Refresh">
+                            </button>
+                        </tr>
+                        ---------------
+
+                                                        <!-- <td class="test">
+                                    <%= users[i].Gender %>
+                                </td> -->
+
+                                ------------- index.js
+                <!-- <input id="name-<%= i + 1 %>" type="text" name="name-<%= users[i].id %>" value=<%= users[i].Name %> placeholder="Mark Stoenis" /> -->
+
+                    <tbody>
+                        <% for(var i=0;i< users.length ; i++ ) {%>
+                            <tr class="row">
+                                <td>
+                                    <input id="<%= i + 1 %>" name="id" type="checkbox" value="<%= users[i].id %>" />
+                                </td>
+                                <td class="test">
+                                    <%= i + 1 %>
+                                </td>
+                                <td id="name-<%= i + 1 %>"><%= users[i].Name %></td>
+                                <!-- <td class="form-group" id="<%= users[i].Name %>">
+                                    <%= users[i].Name %>
+                                </td> -->
+                                <td class="form-group">
+                                    <input  id="email-<%= i + 1 %>" type="text" name="email-<%= users[i].id %>" value="<%= users[i].Email %>"
+                                        placeholder="example@gmail.com">
+                                </td>
+                                <td>
+                                M<input type="radio" id="male-<%= i + 1 %>" name="gender-<%= users[i].id %>" value="Male" <%=users[i].Gender=='Male'
+                                    ? 'checked' : '' %> >
+                                F<input type="radio" id="female-<%= i + 1 %>" name="gender-<%= users[i].id %>" value="Female"  <%=users[i].Gender=='Female' ? 'checked' : '' %> >
+                                </td>
+                                <td>
+                                Active<input type="radio" id="active-<%= i + 1 %>" name="status-<%= users[i].id %>" value="Active" <%=users[i].Status=='Active' ? 'checked'
+                                    : '' %> >
+                                Inactive<input type="radio" id="inactive-<%= i + 1 %>" name="status-<%= users[i].id %>" value="Inactive" <%=users[i].Status=='Inactive'
+                                    ? 'checked' : '' %> >
+                                </td>
+                                <td>
+                                    <a href="/update-user?id=<%=users[i].id%>" class="btn border-shadow update">
+                                        <span class="text-gradent"><i class="fas fa-pencil-alt"></i></span>
+                                    </a>
+                                    <a class="btn border-shadow delete" data-id=<%=users[i].id%>>
+                                        <span class="text-gradent"><i class="fas fa-times"></i></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="test">
+                                <button type="submit" class="test">Save</button>
+                            </tr>
+                            <% } %>
+                    </tbody>
+
+                    --------------
+                        if (unindexed_array[r].name == "status") {
+      var request = {
+        url: `http://localhost:3000/api/users/${data.id}`,
+        method: "PUT",
+        data: data,
+      };
+
+      $.ajax(request).done(function (response) {
+        alert(`Data Updated Successfully! for id ${data.id}`);
+      });
+    }
+                            <tr id="users"><%= users.length %></tr>
+
+
+                             <div> Dropdown Value :- <input type="text" id="dropdowninp" list="AddColumn" name="AddColumn" /> <label id='cross'>  &#10005</label><div>
+25060

@@ -1,0 +1,47 @@
+console.log('Hello')
+ {
+ let arr = [2,5,4,5,12,4];
+ console.log(arr.sort(function(a,b){
+    return a-b
+ })[arr.length - 1])
+ }
+ {
+  let arr=[1,2,3,4,5]
+  function isSorted(arr,n){
+  for(let i=0;i< n;i++){
+   for(let j=i+1;j< n;j++){
+     if(arr[j]<arr[i])  return false
+   }
+}
+return true;
+  }
+  console.log(isSorted(arr,5))
+ }
+ console.log('***unique values oon array***')
+ {
+   let arr = [ 1, 1, 1, 1,  2,  2, 2, 2, 3, 4, 5,  5,  5, 5, 5, 6, 6, 9, 55, 87]
+  function unique(arr){
+  let i=0
+  for(let j=1;j<arr.length;j++){
+    if(arr[i] != arr[j]){
+      i++;
+      arr[i]=arr[j]
+    }
+  }
+  return arr.slice(0,i+1);
+  }
+  console.log('Value Of I',unique(arr))
+ }
+ console.log('Left Rotate Array By One Piece')
+ {
+  function letRot(arr){
+    let temp=arr[0];
+    for(let i=0;i<arr.length-2;i++){
+      arr[i]=arr[i+1] ;
+    }
+    arr.push(temp)
+    return arr
+  }
+  let arr = [1,2,3,4,5,6,7]
+  console.log(letRot(arr))
+ }

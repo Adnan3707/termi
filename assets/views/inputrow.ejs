@@ -1,0 +1,208 @@
+<%- include('include/_header') %>
+<main id="site-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <div class="filter">
+                <a href="/"><i class="fas fa-angle-double-left"></i> All Users</a>
+            </div>
+            <a href="/add-user" class="border-shadow">
+                <span class="text-gradient">New User <i class=" fas fa-user"></i></span>
+            </a>
+        </div>
+
+      <form action="/api/uploadcsv" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploadcsv" />
+        <button type="submit">Upload</button>
+      </form>
+        <script>
+          async function uploadFile() {
+            let formData = new FormData(); 
+            formData.append("fileupload", fileupload.files[0]);
+              await fetch('http://localhost/upload', {
+              method: "POST", 
+              body: formData
+            }); 
+          }
+          </script>
+        <div id="add">
+            <label>Input Column Name :-
+                <input type="text" id="AddColumninp" list="AddColumn" name="AddColumn" /></label>
+                <select id="AddColumnSelect" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <option value="Select">Select</option>
+                    <option value="VARCHAR(255)">VARCHAR</option>
+                    <option value="DATETIME(6)">Date & TIME</option>		
+                    <option value="DATE">DATE</option>
+                    <option value="INT(7)">INT</option>
+                    <option value="TEXT">TEXT</option>
+                    <option value="TIME(6)">TIME</option>
+                    <option value="DROPDOWN">DROPDOWN</option>
+                  </select>
+                <input id="AddColumn" type="button" value="Add Row">
+          
+
+            <!-- <datalist id="AddColumn">
+                <option value="Add Input">
+                <option value="Add Dropdown">
+            </datalist> -->
+          </div>
+            <div>
+                <label>Delete Column :- </label>
+                <select id="delcol" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <option value="">Select</option>
+                    <% for(var i=0;i< cdata.length ; i++ ) {%>
+                        <option value="<%= cdata[i].COLUMN_NAME %>"><%= cdata[i].COLUMN_NAME %></label>
+                    <% } %>
+                    <% for(var i=0;i< ddata.length ; i++ ) {%>
+                      <option value="ext,<%=ddata[i].drpname %>"><%= ddata[i].drpname %></label>
+                  <% } %>
+                  </select>
+                  <button id ='delete' class="btn btn-danger">Delete</button>
+            <!-- Example single danger button -->
+            </div>
+    </div>
+</main>
+    <!-- /Main Site -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+<!--  -->
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+       
+<script>
+    $('#AddColumn').on( "click", function( event ) {
+    //  console.log($( "#AddColumnSelect option:selected" ).val())
+    //  console.log($( "#dropdowninp" ).val())
+    //  console.log($('#AddColumninp').val())
+    // console.log($("input[class='dropdowninp']").val())
+    // console.log($( "#AddColumnSelect option:selected" ).val() == 'DROPDOWN')
+    if($( "#AddColumnSelect option:selected" ).val() == 'DROPDOWN'){
+     let items = document.getElementById("dropdowninp")
+      types = [];
+    $("input[class='dropdowninp']").each(function() {
+        types.push($(this).val());
+    });
+    console.log($("input[class='dropdowninp']") === true)
+   let rnage = {}
+   rnage['drpname'] =  $('#AddColumninp').val()
+   rnage['drpvalue'] =  types.toString()
+    console.log(types.toString());
+    console.log(rnage)
+    var request = {
+                  url: `http://localhost:3000/api/extra/dropdown`,
+                  method: "GET",
+                  data: rnage,
+                    };
+                    $.ajax(request).done(function (response) {
+                      console.log(rnage)
+                    })
+     location.reload();
+    }else{
+    let drp ={};
+    drp["column_name"]= $('#AddColumninp').val()
+    drp["datatype"] = $( "#AddColumnSelect option:selected" ).val() ;
+    console.log(drp)
+    var request = {
+                  url: `http://localhost:3000/api/extra/dropdowncol`,
+                  method: "GET",
+                  data: drp,
+                    };
+                    $.ajax(request).done(function (response) {
+                      console.log(rnage)
+                    })
+                  }
+    location.reload();
+    })
+    $('#AddColumninp').on( "change", function( event ) {
+      console.log(event)
+      let a = $('AddColumninp').val()  
+      console.log(a)
+    });
+    $('#AddColumnSelect').on('click',function(event){
+      if($( "#AddColumnSelect option:selected" ).val() == 'DROPDOWN'){
+        // if(document.getElementById("drpx")){
+        //   console.log($('#drpx'))
+        //   return false
+        // }
+        if($('#drpd').length > 0){
+          return ;
+        }else{
+          $("#add").append(`
+      <div> *******************  ---- *******************</div>
+      `)
+          $("#add").append(`
+      <form action="/api/uploadcsv" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploadcsv" />
+        <button type="submit">Upload</button>
+      </form>
+      `);
+      $("#add").append(`
+      <div> ***** Upload CSV file from Above options Or Click below to enter Manually *****</div>
+      `)
+          $("#add").append(`
+        <div class="number">
+                  <span class="minus">-</span>
+                  <input id ="inpco" type="text" value="1"/>
+                  <span class="plus">+</span>
+                  <button type="button" id="drpd">input dropdown value</button>
+                  </div> 
+                  <div class="frame">
+          `);
+        }
+      }
+      $(document).ready(function() {
+        $('.minus').click(function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').click(function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+  $('#drpd').click(function(){
+    console.log($('#inpco').val())
+    $('#inpco').val()
+    for(let i=0 ; i<$('#inpco').val();i++){
+      $("#add").append(`
+    <div id="drpx"> Dropdown Value :- <input type="text" id="dropdowninp" class="dropdowninp" list="AddColumn" name="AddColumn" /> <a id='cross'>&#10005</a>
+    `)
+    }
+    $('#cross').on('click',function(event){
+      console.log('clicked')
+      $("#dropdowninp").remove();
+    })
+  })
+    });
+    })
+  $('#delete').click(function(){
+    let val = $( "#delcol option:selected" ).val()
+    console.log(val)
+    let text = "Press a button!\nEither OK or Cancel.";
+  if (confirm(text) == true) {
+    text = "You pressed OK!";
+    var request = {
+                  url: `http://localhost:3000/api/extra/delcol`,
+                  method: "GET",
+                  data: val,
+                    };
+                    $.ajax(request).done(function (response) {
+                      console.log(rnage)
+                    })
+    location.reload();
+                  } else {
+    text = "You canceled!";
+  }
+   
+  })
+  </script>
